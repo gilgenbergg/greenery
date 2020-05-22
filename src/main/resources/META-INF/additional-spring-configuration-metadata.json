@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "org.springframework.boot",
+      "type": "java.lang.String",
+      "description": "Description for org.springframework.boot."
+    },
+    {
+      "name": "spring.jpa.hibernate.show-sql",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.hibernate.show-sql."
+    }
+  ] }
