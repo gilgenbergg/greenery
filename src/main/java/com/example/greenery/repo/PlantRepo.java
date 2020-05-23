@@ -19,8 +19,9 @@ public interface PlantRepo extends JpaRepository<Plant, Long> {
     @Query(value = "select * from plant where client_id = :userId")
     Optional<List<Plant>> getPlantsByClientId(Integer uid);
 
-    @Query(value = "delete * from resource where plant_id = :plantId; " +
-            "delete * from plant where plant_id = :plantId;")
-    @Transactional
-    void deleteByPlantId(Integer plantId);
+    //TODO
+//    @Query(value = "delete * from resource where plant_id = :plantId; " +
+//            "delete * from plant where plant_id = :plantId;")
+//    @Transactional
+//    void deleteByPlantId(Integer plantId);
 }

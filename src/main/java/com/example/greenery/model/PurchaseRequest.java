@@ -11,61 +11,72 @@ public class PurchaseRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "preq_id")
-    public Integer pReqID;
+    public Integer preqId;
 
     @Column(name = "creq_id")
-    public Integer cReqID;
+    public Integer creqId;
 
     @Column(name = "plant_id")
-    public Integer plantID;
+    public Integer plantId;
 
     @Column(name = "admin_id")
-    public Integer adminID;
+    public Integer adminId;
+
+    @Column(name = "client_id")
+    public Integer clientId;
 
     @Column(name = "landscaperq_id")
-    public Integer landscaperID;
+    public Integer landscaperId;
 
     @Column(name = "status")
     public String status;
 
-    public Integer getpReqID() {
-        return pReqID;
+    public Integer getPreqId() {
+        return preqId;
     }
 
-    public void setpReqID(Integer pReqID) {
-        this.pReqID = pReqID;
+    public void setPreqId(Integer pReqId) {
+        this.preqId = pReqId;
     }
 
-    public Integer getcReqID() {
-        return cReqID;
+    public Integer getCreqId() {
+        return creqId;
     }
 
-    public void setcReqID(Integer cReqID) {
-        this.cReqID = cReqID;
+    public void setCreqId(Integer cReqId) {
+        this.creqId = cReqId;
     }
 
-    public Integer getPlantID() {
-        return plantID;
+    public Integer getPlantId() {
+        return plantId;
     }
 
-    public void setPlantID(Integer plantID) {
-        this.plantID = plantID;
+    public void setPlantId(Integer plantId) {
+        this.plantId = plantId;
     }
 
-    public Integer getAdminID() {
-        return adminID;
+    public Integer getAdminId() {
+        return adminId;
     }
 
-    public void setAdminID(Integer adminID) {
-        this.adminID = adminID;
+    public Integer getClientId() {
+        return clientId;
     }
 
-    public Integer getLandscaperID() {
-        return landscaperID;
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
-    public void setLandscaperID(Integer landscaperID) {
-        this.landscaperID = landscaperID;
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
+    public Integer getLandscaperId() {
+        return landscaperId;
+    }
+
+    public void setLandscaperId(Integer landscaperId) {
+        this.landscaperId = landscaperId;
     }
 
     public String getStatus() {

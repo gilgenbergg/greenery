@@ -114,50 +114,33 @@ public class APIController {
         return plantService.plantsByUID(uid);
     }
 
+    @GetMapping("/plants/{plantId}/set/lastInspection")
+    public void setLastInspection(@PathVariable Integer plantId, @RequestParam String d,
+                                  @RequestParam String m, @RequestParam String y) {
+        String newDate = d + "/" + m + "/" + y;
+        plantService.setLastInspection(plantId, newDate);
+    }
+
+    @GetMapping("/plants/{plantId}/set/nextInspection")
+    public void setNextInspection(@PathVariable Integer plantId, @RequestParam String d,
+                                  @RequestParam String m, @RequestParam String y) {
+        String newDate = d + "/" + m + "/" + y;
+        plantService.setNextInspection(plantId, newDate);
+    }
+
     @PostMapping(path = "/plants/add", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void addPlant(@RequestBody Plant newPlant) {
         plantService.addPlant(newPlant);
     }
 
-    @PutMapping(path = "/plants/{plantId}/set/lastInspection", consumes = "application/json", produces = "application/json")
-    public void setLastInspection(@RequestBody String newDate, @PathVariable Integer plantId) {
-        Optional<Plant> plant = plantService.getPlantRepo().getPlantByPlantId(plantId);
-
-//                .map(plant -> {
-//                    plant.setLastInspection(newDate);
-//                    return plantService.getPlantRepo().save(plant);
-//                });
-    }
-
-//    @PostMapping(path = "/plants/{plantId}/set/lastInspection", consumes = "application/json",
-//                    produces = "application/json")
+    //TODO
+//    @DeleteMapping("/plants/{plantId}/delete")
 //    @ResponseStatus(HttpStatus.OK)
-//    void setLastInspection(@PathVariable("plantId") Integer plantId, @RequestBody HttpServletRequest body) throws IOException {
-//        Plant plant = plantById(plantId);
-//        String received = IOUtils.toString(body.getInputStream(), StandardCharsets.UTF_8);
-////        ObjectMapper mapper = new ObjectMapper();
-////        String newDate = mapper.readValue(request.getInputStream(), String.class);
-//        //plant.setLastInspection(newDate);
-//        plantService.getPlantRepo().save(plant);
-    //}
-
-//    @PostMapping(path = "/plants/{plantId}/set/nextInspection", consumes = "application/json",
-//                    produces = "application/json")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void setNextInspection(@PathVariable("plantId") Integer plantId, @RequestBody JSONObject arg) throws JSONException {
-//        Plant plant = plantById(plantId);
-//        String newDate = (String) arg.get("date");
-//        plant.setNextInspection(newDate);
-//        plantService.getPlantRepo().save(plant);
+//    @Transactional
+//    public void deletePlant(@PathVariable Integer plantId) {
+//        plantService.deletePlantById(plantId);
 //    }
-
-    @DeleteMapping("/plants/{plantId}/delete")
-    @ResponseStatus(HttpStatus.OK)
-    @Transactional
-    public void deletePlant(@PathVariable Integer plantId) {
-        plantService.deletePlantById(plantId);
-    }
 
     // Instruction mappings //
     @GetMapping("/instructions")
@@ -188,9 +171,118 @@ public class APIController {
     }
 
     // Client request mappings //
+    @GetMapping("/creqs")
+    public List<ClientRequest> allCreqs() {
+        return creqService.findAll();
+    }
+
+    @GetMapping("/creqs/{id}")
+    public ClientRequest creqByID(@PathVariable Integer creqId) {
+        return creqService.getCreqByCreqId(creqId);
+    }
+
+    @PostMapping(path = "/creqs/add", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCreq(@RequestBody ClientRequest newCreq) {
+        creqService.addCreq(newCreq);
+    }
+
+    @GetMapping("/creqs/status/{status}")
+    public List<ClientRequest> getCreqByStatus(@PathVariable String status) {
+        return creqService.getCreqByStatus(status);
+    }
+
+    @GetMapping("/creqs/type/{type}")
+    public List<ClientRequest> getCreqByType(@PathVariable String type) {
+        return creqService.getCreqByType(type);
+    }
+
+    @GetMapping("/creqs/owner/{clientId}")
+    public List<ClientRequest> getCreqByClientId(@PathVariable Integer clientId) {
+        return creqService.getCreqByClientId(clientId);
+    }
+
+    @GetMapping("/creqs/{creqId}/set/admin")
+    public void assignCreqAdmin(@PathVariable Integer creqId, @RequestParam Integer adminId) {
+        creqService.assignAdmin(creqId, adminId);
+    }
+
+    @GetMapping("/creqs/{creqId}/set/landscaper")
+    public void assignCreqLandscaper(@PathVariable Integer creqId, @RequestParam Integer landscaperId) {
+        creqService.assignLandscaper(creqId, landscaperId);
+    }
+
+    @GetMapping("/creqs/{creqId}/set/status")
+    public void setCreqStatus(@PathVariable Integer creqId, @RequestParam String status) {
+        creqService.setCreqStatus(creqId, status);
+    }
+
+    @GetMapping("/creqs/{creqId}/set/type")
+    public void setCreqType(@PathVariable Integer creqId, @RequestParam String type) {
+        creqService.setCreqType(creqId, type);
+    }
+
+    @GetMapping("/creqs/admin/{adminId}")
+    public ClientRequest getCreqByAdminId(@PathVariable Integer adminId) {
+        return creqService.getCreqByAdminId(adminId);
+    }
+
+    @GetMapping("/creqs/landscaper/{landscapertId}")
+    public ClientRequest getCreqByLandscaperId(@PathVariable Integer landscaperId) {
+        return creqService.getCreqByLandscaperId(landscaperId);
+    }
 
     // Purchase request mappings //
+    @GetMapping("/preqs")
+    public List<PurchaseRequest> allPreqs() {
+        return purchaseService.findAll();
+    }
 
+    @GetMapping("/preqs/{preqId}")
+    public PurchaseRequest preqByID(@PathVariable Integer preqId) {
+        return purchaseService.getPreqByPreqId(preqId);
+    }
+
+    @PostMapping(path = "/preqs/add", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addPreq(@RequestBody PurchaseRequest newPreq) {
+        purchaseService.addPreq(newPreq);
+    }
+
+    @GetMapping("/preqs/status/{status}")
+    public List<PurchaseRequest> getPreqByStatus(@PathVariable String status) {
+        return purchaseService.getPreqByStatus(status);
+    }
+
+    @GetMapping("/preqs/owner/{clientId}")
+    public List<PurchaseRequest> getPreqByClientId(@PathVariable Integer clientId) {
+        return purchaseService.getPreqByClientId(clientId);
+    }
+
+    @GetMapping("/preqs/{preqId}/set/admin")
+    public void assignPreqAdmin(@PathVariable Integer preqId, @RequestParam Integer adminId) {
+        purchaseService.assignAdmin(preqId, adminId);
+    }
+
+    @GetMapping("/preqs/{preqId}/set/landscaper")
+    public void assignPreqLandscaper(@PathVariable Integer preqId, @RequestParam Integer landscaperId) {
+        purchaseService.assignLandscaper(preqId, landscaperId);
+    }
+
+    @GetMapping("/preqs/{preqId}/set/status")
+    public void setPreqStatus(@PathVariable Integer preqId, @RequestParam String status) {
+        purchaseService.setPreqStatus(preqId, status);
+    }
+
+    @GetMapping("/preqs/admin/{adminId}")
+    public List<PurchaseRequest> getPreqByAdminId(@PathVariable Integer adminId) {
+        return purchaseService.getPreqByAdminId(adminId);
+    }
+
+    @GetMapping("/preqs/landscaper/{landscapertId}")
+    public List<PurchaseRequest> getPreqByLandscaperId(@PathVariable Integer landscaperId) {
+        return purchaseService.getPreqByLandscaperId(landscaperId);
+    }
 
     public CreqService getCreqService() {
         return creqService;

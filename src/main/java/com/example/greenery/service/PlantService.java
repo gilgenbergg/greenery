@@ -38,15 +38,36 @@ public class PlantService {
         plantRepo.save(newPlant);
     }
 
-    @Transactional
-    public void deletePlantById(Integer plantId) {
-        plantRepo.deleteByPlantId(plantId);
+    public void setLastInspection(Integer plantId, String newDate) {
+        plantRepo.getPlantByPlantId(plantId)
+                .map(plant -> {
+                    plant.setLastInspection(newDate);
+                    return plantRepo.save(plant);
+                })
+                .orElseGet(() -> {
+                    throw new ItemNotFoundException(plantId);
+                });
     }
 
+    public void setNextInspection(Integer plantId, String newDate) {
+        plantRepo.getPlantByPlantId(plantId)
+                .map(plant -> {
+                    plant.setNextInspection(newDate);
+                    return plantRepo.save(plant);
+                })
+                .orElseGet(() -> {
+                    throw new ItemNotFoundException(plantId);
+                });
+    }
+
+    //TODO
+//    @Transactional
+//    public void deletePlantById(Integer plantId) {
+//        plantRepo.deleteByPlantId(plantId);
+//    }
 
     @Autowired
     public void setPlantRepo(PlantRepo plantRepo) {
         this.plantRepo = plantRepo;
     }
-
 }
