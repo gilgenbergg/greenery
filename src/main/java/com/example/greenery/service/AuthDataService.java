@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class AuthDataService {
@@ -28,8 +29,8 @@ public class AuthDataService {
                 .orElseThrow(() -> new LoginNotFoundException(login));
     }
 
-    public void addItem(AuthData newAuthData) {
-        authDataRepo.save(newAuthData);
+    public AuthData addItem(AuthData newAuthData) {
+        return authDataRepo.save(newAuthData);
     }
 
     public AuthDataRepo getAuthDataRepo() {

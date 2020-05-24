@@ -30,3 +30,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+src/main/resources/static/node_modules
+npm-*.log
+src/main/resources/static/generated

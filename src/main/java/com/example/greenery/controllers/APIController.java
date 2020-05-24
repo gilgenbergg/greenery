@@ -50,8 +50,9 @@ public class APIController {
 
     @PostMapping(path = "/authData/add", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addAuthData(@RequestBody AuthData newAuthData) {
-        authDataService.addItem(newAuthData);
+    public Integer addAuthData(@RequestBody AuthData newAuthData) {
+        AuthData item = authDataService.addItem(newAuthData);
+        return item.id;
     }
 
     // User info mappings //
