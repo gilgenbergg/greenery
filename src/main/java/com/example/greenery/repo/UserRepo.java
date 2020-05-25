@@ -23,4 +23,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query(value = "select * from user_info  where user_id = :uid")
     Optional<User> getUserByUserId(Integer uid);
+
+    @Query(value = "select * from user_info  where auth_data_id = :authDataId")
+    Optional<User> getUserByAuthDataId(Integer authDataId);
 }

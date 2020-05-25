@@ -23,7 +23,7 @@ public class User {
     public String secondName;
 
     @Column(name = "auth_data_id")
-    public Integer authDataID;
+    public Integer authDataId;
 
     public Integer getUserId() {
         return userId;
@@ -57,11 +57,11 @@ public class User {
         this.secondName = secondName;
     }
 
-    public Integer getAuthDataID() {
-        return authDataID;
+    public Integer getAuthDataId() {
+        return authDataId;
     }
 
-    public void setAuthDataID(Integer authDataID) {
-        this.authDataID = authDataID;
+    public void setAuthDataId(Integer authDataId) {
+        this.authDataId = authDataId;
     }
 }

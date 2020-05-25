@@ -48,8 +48,12 @@ public class UserService {
         return userRepo.getUserByUserId(uid).orElseThrow(() -> new ItemNotFoundException(uid));
     }
 
-    public void addUser(User newUser) {
-        userRepo.save(newUser);
+    public User findUserByAuthDataId(Integer authDataId) {
+        return userRepo.getUserByAuthDataId(authDataId).orElseThrow(() -> new ItemNotFoundException(authDataId));
+    }
+
+    public User addUser(User newUser) {
+        return userRepo.save(newUser);
     }
 
 }

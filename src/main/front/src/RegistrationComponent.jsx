@@ -1,9 +1,7 @@
 import React from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import axios from 'axios';
-import {
-    Redirect,
-} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {Alert} from "react-bootstrap";
 import { ReactRadioButtonsGroup, ReactRadioButton } from 'react-radio-buttons-group';
 
@@ -66,7 +64,6 @@ class RegistrationComponent extends React.Component {
             e.preventDefault();
             if ((this.state.login === "") || (this.state.password === "") || (this.state.firstName === "") ||
                 (this.state.secondName === "") || (this.state.role === "")) {
-                console.log(this.state);
                 this.setState({valid: false, redirect: false, showAlert: true });
                 return false;
             }
@@ -74,7 +71,6 @@ class RegistrationComponent extends React.Component {
                 login: this.state.login,
                 password: this.state.password
             };
-            console.log(authInfo);
             axios.post(`http://localhost:8081/greenery/authData/add`, authInfo, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +104,6 @@ class RegistrationComponent extends React.Component {
             .then (response => {
                 let status = response.data.status;
                 console.log("user info sent!");
-                console.log(status);
                 this.setState({valid: true, redirect: true});
             })
             .catch(error => {

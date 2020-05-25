@@ -15,6 +15,7 @@ class LoginComponent extends React.Component {
         this.state = {
             login: "",
             password: "",
+            id: 0,
             valid: true,
             redirect: false,
             showAlert: false
@@ -41,7 +42,7 @@ class LoginComponent extends React.Component {
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/greenery' />
+            return <Redirect to={{pathname: '/greenery', state: {id: this.state.id}}}/>
         }
     };
 
@@ -50,12 +51,11 @@ class LoginComponent extends React.Component {
             this.setState({valid: false, redirect: false, showAlert: true });
             return false;
         }
-        console.log(this.state.password);
         axios.get(`http://localhost:8081/greenery/authData/${this.state.login}`)
             .then(response => {
                 const authData = response.data;
                 if (authData["password"] === this.state.password) {
-                    this.setState({valid: true, redirect: true});
+                    this.setState({valid: true, redirect: true, id: authData["id"]});
                     return true;
                 }
                 else {

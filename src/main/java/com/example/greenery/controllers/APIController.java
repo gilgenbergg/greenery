@@ -81,10 +81,15 @@ public class APIController {
         return userService.findUserByUID(uid);
     }
 
+    @GetMapping("/users/authId/{authId}")
+    public User userByAuthId(@PathVariable Integer authId) {
+        return userService.findUserByAuthDataId(authId);
+    }
+
     @PostMapping(path = "/users/add", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addUser(@RequestBody User newUser) {
-        userService.addUser(newUser);
+    public User addUser(@RequestBody User newUser) {
+        return userService.addUser(newUser);
     }
 
     // Plants mappings //

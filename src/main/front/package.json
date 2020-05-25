@@ -11,6 +11,7 @@
     "mdbreact": "^4.26.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-bootstrap-table-next": "^4.0.2",
     "react-dom": "^16.13.1",
     "react-radio-buttons-group": "^1.0.2",
     "react-scripts": "3.4.1"

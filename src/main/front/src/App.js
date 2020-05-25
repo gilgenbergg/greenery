@@ -11,7 +11,7 @@ import {
 import './App.css';
 import LoginComponent from "./LoginComponent";
 import RegistrationComponent from "./RegistrationComponent";
-import OfficeMainComponent from "./OfficeMainComponent";
+import PersonalCabinet from "./PersonalCabinet";
 
 
 class App extends React.Component {
@@ -28,7 +28,7 @@ class App extends React.Component {
                                 <RegistrationComponent/>
                             </Route>
                             <Route path={["/greenery"]}>
-                                <OfficeMainComponent/>
+                                <PersonalCabinet/>
                             </Route>
                         </Switch>
                     </div>
