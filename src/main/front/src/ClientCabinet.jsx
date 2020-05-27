@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
-import {Alert, Button} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import NewCreq from "./modals/NewCreq";
 
 const plantsColumns = [{

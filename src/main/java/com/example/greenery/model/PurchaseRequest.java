@@ -25,7 +25,7 @@ public class PurchaseRequest {
     @Column(name = "client_id")
     public Integer clientId;
 
-    @Column(name = "landscaperq_id")
+    @Column(name = "landscaper_id")
     public Integer landscaperId;
 
     @Column(name = "status")

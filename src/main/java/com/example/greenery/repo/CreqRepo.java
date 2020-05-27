@@ -18,10 +18,10 @@ public interface CreqRepo extends JpaRepository<ClientRequest, Long> {
     Optional<ClientRequest> getClientRequestByCreqId(Integer creqId);
 
     @Query(value = "select * from creq where admin_id = :adminId")
-    Optional<ClientRequest> getClientRequestByAdminId(Integer adminId);
+    Optional<List<ClientRequest>> getClientRequestByAdminId(Integer adminId);
 
     @Query(value = "select * from creq where landscaper_id = :landscaperId")
-    Optional<ClientRequest> getClientRequestByLandscaperId(Integer landscaperId);
+    Optional<List<ClientRequest>> getClientRequestByLandscaperId(Integer landscaperId);
 
     @Query(value = "select * from creq where status = :status")
     Optional<List<ClientRequest>> getClientRequestByStatus(String status);

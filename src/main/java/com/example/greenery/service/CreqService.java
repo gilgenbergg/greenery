@@ -4,7 +4,6 @@ import com.example.greenery.exceptions.ItemNotFoundException;
 import com.example.greenery.exceptions.StatusNotFoundException;
 import com.example.greenery.exceptions.TypeNotFoundException;
 import com.example.greenery.model.ClientRequest;
-import com.example.greenery.model.PurchaseRequest;
 import com.example.greenery.repo.CreqRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,11 +91,11 @@ public class CreqService {
                 });
     }
 
-    public ClientRequest getCreqByAdminId(Integer adminId) {
+    public List<ClientRequest> getCreqByAdminId(Integer adminId) {
         return creqRepo.getClientRequestByAdminId(adminId).orElseThrow(() -> new ItemNotFoundException(adminId));
     }
 
-    public ClientRequest getCreqByLandscaperId(Integer landscaperId) {
+    public List<ClientRequest> getCreqByLandscaperId(Integer landscaperId) {
         return creqRepo.getClientRequestByLandscaperId(landscaperId).orElseThrow(() -> new ItemNotFoundException(landscaperId));
     }
 

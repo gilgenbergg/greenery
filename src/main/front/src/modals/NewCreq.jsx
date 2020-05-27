@@ -3,7 +3,8 @@ import {Alert, Button} from "react-bootstrap";
 import {ReactRadioButton, ReactRadioButtonsGroup} from "react-radio-buttons-group";
 import axios from "axios";
 import {MDBBtn} from "mdbreact";
-export default class Modal extends React.Component {
+
+export default class NewCreq extends React.Component {
 
     constructor(props)
     {

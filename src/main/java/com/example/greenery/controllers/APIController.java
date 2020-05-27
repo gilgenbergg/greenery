@@ -140,14 +140,6 @@ public class APIController {
         plantService.addPlant(newPlant);
     }
 
-    //TODO
-//    @DeleteMapping("/plants/{plantId}/delete")
-//    @ResponseStatus(HttpStatus.OK)
-//    @Transactional
-//    public void deletePlant(@PathVariable Integer plantId) {
-//        plantService.deletePlantById(plantId);
-//    }
-
     // Instruction mappings //
     @GetMapping("/instructions")
     public List<Instruction> allInstructions() {
@@ -168,6 +160,16 @@ public class APIController {
     @GetMapping("/resources/id/{resourceId}")
     public Resource resourceByID(@PathVariable Integer resourceId) {
         return resourceService.getResourceByResourceId(resourceId);
+    }
+
+    @GetMapping("/resources/plant/{plantId}")
+    public List<Resource> resourceByPlantID(@PathVariable Integer plantId) {
+        return resourceService.getResourcesByPlantId(plantId);
+    }
+
+    @GetMapping("/resources")
+    public List<Resource> allResources() {
+        return resourceService.findAll();
     }
 
     @PostMapping(path = "/resources/add", consumes = "application/json", produces = "application/json")
@@ -229,12 +231,12 @@ public class APIController {
     }
 
     @GetMapping("/creqs/admin/{adminId}")
-    public ClientRequest getCreqByAdminId(@PathVariable Integer adminId) {
+    public List<ClientRequest> getCreqByAdminId(@PathVariable Integer adminId) {
         return creqService.getCreqByAdminId(adminId);
     }
 
-    @GetMapping("/creqs/landscaper/{landscapertId}")
-    public ClientRequest getCreqByLandscaperId(@PathVariable Integer landscaperId) {
+    @GetMapping("/creqs/landscaper/{landscaperId}")
+    public List<ClientRequest> getCreqByLandscaperId(@PathVariable Integer landscaperId) {
         return creqService.getCreqByLandscaperId(landscaperId);
     }
 
@@ -285,7 +287,7 @@ public class APIController {
         return purchaseService.getPreqByAdminId(adminId);
     }
 
-    @GetMapping("/preqs/landscaper/{landscapertId}")
+    @GetMapping("/preqs/landscaper/{landscaperId}")
     public List<PurchaseRequest> getPreqByLandscaperId(@PathVariable Integer landscaperId) {
         return purchaseService.getPreqByLandscaperId(landscaperId);
     }

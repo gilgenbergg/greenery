@@ -19,7 +19,8 @@ class RegistrationComponent extends React.Component {
             authInfo: {},
             valid: true,
             redirect: false,
-            showAlert: false
+            showAlert: false,
+            authId: null
         };
 
         this.submitForm = this.submitForm.bind(this);
@@ -60,13 +61,7 @@ class RegistrationComponent extends React.Component {
             }
         };
 
-        submitForm = e => {
-            e.preventDefault();
-            if ((this.state.login === "") || (this.state.password === "") || (this.state.firstName === "") ||
-                (this.state.secondName === "") || (this.state.role === "")) {
-                this.setState({valid: false, redirect: false, showAlert: true });
-                return false;
-            }
+        sendAuthData = () => {
             const authInfo = {
                 login: this.state.login,
                 password: this.state.password
@@ -79,8 +74,8 @@ class RegistrationComponent extends React.Component {
             })
                 .then (response => {
                     let id = response.data;
+                    this.setState({authId: id}, this.sendUserInfo);
                     console.log("auth data sent!");
-                    this.sendUserInfo(id);
                 })
                 .catch(error => {
                     console.log("error happend");
@@ -88,11 +83,21 @@ class RegistrationComponent extends React.Component {
                 });
         };
 
-    sendUserInfo = (id) => {
+        submitForm = e => {
+            e.preventDefault();
+            if ((this.state.login === "") || (this.state.password === "") || (this.state.firstName === "") ||
+                (this.state.secondName === "") || (this.state.role === "")) {
+                this.setState({valid: false, redirect: false, showAlert: true });
+                return false;
+            }
+            this.sendAuthData();
+        };
+
+    sendUserInfo = () => {
         const userInfo = {
             firstName: this.state.firstName,
             secondName: this.state.secondName,
-            authDataID: id,
+            authDataId: this.state.authId,
             role: this.state.role
         };
         axios.post(`http://localhost:8081/greenery/users/add`, userInfo, {

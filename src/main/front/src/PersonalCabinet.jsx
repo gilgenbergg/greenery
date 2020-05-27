@@ -4,6 +4,8 @@ import {
     withRouter
 } from "react-router-dom";
 import ClientCabinet from "./ClientCabinet";
+import AdminCabinet from "./AdminCabinet";
+import LandCabinet from "./LandCabinet";
 
 class PersonalCabinet extends React.Component {
 
@@ -39,18 +41,12 @@ class PersonalCabinet extends React.Component {
         });
     };
 
-    getClientData = () => {
-      console.log("here!");
-    };
-
     render() {
-        console.log("state in personal cabinet");
-        console.log(this.state);
         return(
             <div>
                 {this.state.role === "client" && <ClientCabinet info={this.state}/>}
-                {/*{this.state.role === "admint" && <AdminCabinet info={this.state}/>}*/}
-                {/*{this.state.role === "landscaper" && <LandscaperCabinet info={this.state}/>}*/}
+                {this.state.role === "admin" && <AdminCabinet info={this.state}/>}
+                {this.state.role === "landscaper" && <LandCabinet info={this.state}/>}
             </div>
         )
     }
